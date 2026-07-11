@@ -17,7 +17,7 @@ export const postUserService=async(userData:IUserDto):Promise<{user:User,token:s
     const registerUser = await UserRepository.create({...userData,password:hash});
     const results= await UserRepository.save(registerUser);
 
-    const token = jwt.sign ( { email: results.email } , claveJwt , { expiresIn : '1h' } ) ;
+    const token = jwt.sign ( { role:results.role } , claveJwt , { expiresIn : '1h' } ) ;
     return {user:results,
         token
     };
