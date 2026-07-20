@@ -4,4 +4,6 @@ export default interface IUserDto{
     password:string,
     role:"client"|"admin",
     createdAt:Date
-}
+};
+
+

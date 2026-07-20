@@ -30,3 +30,17 @@ const token = authHeader.split(" ")[1];
         res.status(401).json({ error: "Token inválido o expirado." });
     }
 };
+
+export const verifyTokenAdmin=async(req:Request,res:Response,next:NextFunction)=>{
+    if((req as any).role==="admin"){
+        return next();
+    }
+    return res.status(401).json({ error: "Solo rol adminstrador permitido" });
+}
+
+export const verifyTokenClient=async(req:Request,res:Response,next:NextFunction)=>{
+    if((req as any).role==="client"){
+        return next();
+    }
+    return res.status(401).json({ error: "Solo rol cliente permitido" });
+}

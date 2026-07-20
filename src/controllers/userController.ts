@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { postUserService, getAllUsersService} from "../services/userService.js"; 
+import { postUserService, getAllUsersService,logueoService} from "../services/userService.js"; 
 import type { User } from "../Models/User.js";
 
 
@@ -26,7 +26,16 @@ export const postUser=async(req:Request,res:Response)=>{
         res.status(400).json({error:"error al crear nuevo registro"})
     }
 };
-
+export const logueo = async (req: Request, res: Response) => {
+    try {
+        const { email, password } = req.body;
+        const logueoUser = await logueoService({ email, password });
+        
+        return res.status(200).json(logueoUser);
+    } catch (error: any) {
+        return res.status(400).json({ error: error.message || "Error al iniciar sesión" });
+    }
+};
 export const putUser=async(req:Request,res:Response)=>{
     res.send("ruta put");
 };
